@@ -5,9 +5,9 @@ const Projects = require("../projects/projects-model");
 async function validateActionId(req, res, next) {
   const id = req.params.id;
   try {
-    const action = await Actions.getbyId(id);
+    const action = await Actions.get(id);
     if (!action) {
-      res.status(400).json({ message: `No action with Id:${id}` });
+      res.status(404).json({ message: `No action with Id:${id}` });
     } else {
       req.actions = action;
       next();
@@ -35,9 +35,9 @@ async function validateActionBody(req, res, next) {
 async function validateProjectId(req, res, next) {
   const id = req.params.id;
   try {
-    const project = await Projects.getbyId(id);
+    const project = await Projects.get(id);
     if (!project) {
-      res.status(400).json({ message: `No project with Id:${id}` });
+      res.status(404).json({ message: `No project with Id:${id}` });
     } else {
       req.projects = project;
       next();

@@ -6,12 +6,11 @@ module.exports = {
   insert,
   update,
   remove,
-  getbyId,
 };
-function get(){
-  return db('actions'); 
-}
-function getbyId(id) {
+// function get(){
+//   return db('actions'); 
+// }
+function get(id) {
   let query = db('actions');
 
   if (id) {

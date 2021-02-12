@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 });
 router.get("/:id", mw.validateProjectId, (req, res) => {
   const id = req.params.id;
-  Projects.getbyId(id)
+  Projects.get(id)
   .then((project) => {
     res.status(200).json(project);
   });
@@ -41,7 +41,7 @@ router.delete('/:id', mw.validateProjectId,(req,res)=>{
     const id =req.params.id;
     Projects.remove(id)
     .then((projects)=>{
-        res.status(203).json({message:`Project:${id} has been deleted from the Database.`})
+        res.status(203).json()
     })
 })
 router.get('/:id/actions',mw.validateProjectId,(req,res)=>{

@@ -15,13 +15,17 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", mw.validateActionId, (req, res) => {
-  res.status(200).json(req.actions);
+  const id = req.params.id
+  Actions.get(id)
+  .then((action)=>{
+    res.status(200).json(action);
+  })
+  
 });
 
 router.post("/", mw.validateActionBody, (req, res) => {
   const action = req.body;
   Actions.insert(action).then((actions) => {
-    console.log(actions);
     res.status(201).json(actions);
   });
 });
@@ -31,7 +35,7 @@ router.put("/:id", mw.validateActionBody,mw.validateActionId,(req,res)=>{
     const id = req.params.id;
     Actions.update(id, changes)
     .then((actions)=>{
-        res.status(200).json(actions)
+      res.status(203).json(actions)
     })
 
 })
@@ -40,7 +44,7 @@ router.delete("/:id", mw.validateActionId,(req,res)=>{
     const id =req.params.id;
     Actions.remove(id)
     .then((actions)=>{
-        res.status(203).json({message:`Action: ${id} has been deleted.`})
+        res.status(203).json()
     })
 })
 module.exports = router;
